@@ -26,6 +26,12 @@ CREATE TABLE ItensPedido(
     CONSTRAINT FK_Produto FOREIGN KEY (fk_Produto_id_Produto) REFERENCES Produto (id_Produto) ON DELETE CASCADE,
     CONSTRAINT FK_Pedido FOREIGN KEY (fk_Pedido_id_Pedido) REFERENCES Pedido (id_Pedido) ON DELETE CASCADE);
 
+CREATE TABLE Contato(
+    id_ItensPedido INT PRIMARY KEY NOT NULL,
+    numero_Contato VARCHAR(15) NOT NULL UNIQUE,
+    tipo_Contato VARCHAR(15) NOT NULL
+);
+
 -- INSERT
 INSERT INTO Cliente(`id_Cliente`, `nome_Cliente`, `email_Cliente`, `telefone_Cliente`) VALUES (null, "Nycolas Ramos", "nycsenju@gmail.com", "61 998085330");
 INSERT INTO Cliente(`id_Cliente`, `nome_Cliente`, `email_Cliente`, `telefone_Cliente`) VALUES (null, "Atylas Ramos", "atylassenju@gmail.com", "61 998085354");
