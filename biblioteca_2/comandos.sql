@@ -65,3 +65,6 @@ SELECT nome_livro, ano_publicacao_livro FROM livro;
 
 
 SELECT nome_autor, sexo, uf_livro FROM livro WHERE (uf_livro = 'SP' OR uf_livro = 'RJ') AND sexo = 'm';
+
+SELECT count(nome_autor) FROM livro;
+SELECT count(*) AS quantidade FROM livro ;
