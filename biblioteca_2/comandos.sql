@@ -53,18 +53,26 @@ SELECT * FROM livro;
 
 SELECT nome_livro, nome_editora FROM livro;
 
-
 SELECT nome_livro, uf_livro FROM livro WHERE sexo = 'm';
 
 SELECT nome_livro, num_pagina_livro FROM livro WHERE sexo = 'm';
 
 SELECT valor_livro FROM livro WHERE uf_livro = 'SP';
 
-
 SELECT nome_livro, ano_publicacao_livro FROM livro;
-
 
 SELECT nome_autor, sexo, uf_livro FROM livro WHERE (uf_livro = 'SP' OR uf_livro = 'RJ') AND sexo = 'm';
 
 SELECT count(nome_autor) FROM livro;
+
 SELECT count(*) AS quantidade FROM livro ;
+
+SELECT sexo,COUNT(sexo) AS quantidade FROM livro GROUP BY sexo;
+
+SELECT uf_livro,COUNT(*) AS quantidade FROM livro GROUP BY uf_livro;
+
+SELECT nome_livro, nome_autor, valor_livro FROM livro WHERE valor_livro >= 250;
+
+SELECT SUM(valor_livro) AS ValorTotal from livro;
+
+SELECT AVG(valor_livro) AS MediaPrecoLivro FROM livro;

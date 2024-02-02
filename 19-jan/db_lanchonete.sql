@@ -55,4 +55,6 @@ DESC Pedido;
 INSERT INTO ItensPedido(`quantidade_ItensPedido`, `fk_Produto_id_Produto`, `fk_Pedido_id_Pedido`) VALUES (2, 6, 7), (1, 3, 5), (3, 5, 8), (2, 2, 5), (4, 1, 3), (3, 5, 1), (2, 4, 2);
 SELECT * FROM itenspedido;
 
-
+-- Condicoes
+SELECT * FROM produto WHERE `preco_Produto` > 10;
+SELECT * FROM pedido WHERE `valorTotal_Pedido` > 40;
