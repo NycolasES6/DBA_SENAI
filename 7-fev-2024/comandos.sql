@@ -68,4 +68,14 @@ VALUES  ("+55 65 998085330","whatsapp", "1"),
         ("+57 25 969647590","whatsapp", "9"),
         ("+24 25 966547590","fixo", "10");
 
-        
+SELECT usuario.id_usuario, usuario.nome_usuario, endereco.logradouro_endereco, telefone.tipo_telefone, telefone.numero_telefone FROM usuario
+INNER JOIN endereco ON usuario.id_usuario = endereco.fk_id_usuario_endereco
+INNER JOIN telefone ON usuario.id_usuario = telefone.fk_id_usuario_telefone;
+
+SELECT A.id_usuario, A.nome_usuario, B.logradouro_endereco, C.tipo_telefone, C.numero_telefone FROM usuario A
+INNER JOIN endereco B ON A.id_usuario = B.fk_id_usuario_endereco
+INNER JOIN telefone C ON A.id_usuario = C.fk_id_usuario_telefone;
+
+SELECT id_usuario, nome_usuario, logradouro_endereco, tipo_telefone, numero_telefone FROM usuario A
+INNER JOIN endereco B ON A.id_usuario = B.fk_id_usuario_endereco
+INNER JOIN telefone C ON A.id_usuario = C.fk_id_usuario_telefone;
