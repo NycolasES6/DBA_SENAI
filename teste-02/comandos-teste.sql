@@ -137,7 +137,7 @@ SELECT sexo_autor, COUNT(*) as Quantidade FROM autor GROUP BY sexo_autor;
 SELECT nome_livro, preco_livro, (preco_livro * 2) as Duas_unidades FROM livro;
 
 -- 15
-SELECT nome_livro, preco_livro, (preco_livro - (preco_livro * 0.15)) as Preco_com_desconto FROM livro;
+SELECT nome_livro, preco_livro, (preco_livro * 0.15) as Desconto FROM livro;
 
 -- 16
 SELECT nome_livro, (preco_livro + (preco_livro * 0.15)) as Preco_com_acrescimo FROM livro;
@@ -146,10 +146,11 @@ SELECT nome_livro, (preco_livro + (preco_livro * 0.15)) as Preco_com_acrescimo F
 SELECT COUNT(*) FROM editora;
 
 -- 18
-SELECT nome_genero FROM genero;
+SELECT COUNT(*) as Quantidade FROM genero;
 
 -- 19
-SELECT COUNT(*) as Quantidade, nome_genero FROM genero GROUP BY nome_genero;
+SELECT COUNT(*) as Quantidade, nome_genero FROM livro 
+INNER JOIN genero ON fk_genero_livro = id_genero GROUP BY nome_genero;
 
 -- 20 
 SELECT nome_livro, preco_livro, nome_genero, nome_editora, email_editora FROM livro 
@@ -169,12 +170,12 @@ INNER JOIN livro ON id_editora = fk_editora_livro;
 SELECT nome_livro, dt_lancamento_livro FROM livro WHERE dt_lancamento_livro >"2000/00/00" AND dt_lancamento_livro < "2024/00/00";
 
 --24
-SELECT nome_livro, dt_lancamento_livro, preco_livro, (preco_livro - (preco_livro * 0.5)) as Preco_com_desconto FROM livro WHERE dt_lancamento_livro = "2001/11/13";
+SELECT nome_livro, dt_lancamento_livro, preco_livro, (preco_livro * 0.5) as Desconto FROM livro WHERE dt_lancamento_livro = "2001/11/13";
 
 -- 25
 SELECT nome_genero, nome_livro, isbn_livro, nome_editora, contato_editora, email_editora FROM genero
 INNER JOIN livro ON id_genero = fk_genero_livro
-INNER JOIN editora ON fk_editora_livro = id_editora ;
+INNER JOIN editora ON fk_editora_livro = id_editora WHERE nome_genero = "Romance";
 
 -- 26
 SELECT nome_autor, cpf_autor, nome_genero FROM autor 
