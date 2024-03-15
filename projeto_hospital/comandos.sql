@@ -9,7 +9,7 @@ CREATE DATABASE `db_hospital`;
 
 USE `db_hospital`;
 
---CRIACAO DO BANCO
+-- CRIACAO DO BANCO
 
 
 -- CRIACAO DAS TABELAS
@@ -86,7 +86,7 @@ CREATE TABLE consultaComInternacao(
 -- CRIACAO DAS TABELAS
 
 
--- ALTER PARA AS CHAVES ESTRANGEIRAS 
+-- ALTER PARA AS CHAVES ESTRANGEIRAS
 
 ALTER TABLE medico ADD CONSTRAINT FK_hospital_medico
     FOREIGN KEY (fk_hospital_medico)
@@ -108,7 +108,7 @@ ALTER TABLE internacao ADD CONSTRAINT FK_consulta_internacao
     REFERENCES consulta (id_consulta)
     ON DELETE CASCADE;
 
--- ALTER PARA AS CHAVES ESTRANGEIRAS 
+-- ALTER PARA AS CHAVES ESTRANGEIRAS
 
 
 -- TRIGGERS
@@ -166,7 +166,7 @@ DELIMITER ;
 -- INSERCOES
 
 -- PACIENTES
-INSERT INTO paciente VALUES 
+INSERT INTO paciente VALUES
 (null, "Nycolas Ramos", 'm', "nycolas@gmailcom", "1983-09-09"),
 (null, "Francisco Amaral", 'm', "franciscoamaral@gmailcom", "1996-07-16"),
 (null, "Aline Sousa", 'f', "aline_sousa@gmailcom", "1983-09-09"),
@@ -206,20 +206,20 @@ INSERT INTO medico VALUES
 
 -- CONSULTA
 INSERT INTO consulta VALUES
-(null, "Cirurgia de revascularização do miocárdio.", "2019-08-10 10:11:00", 13, 3),
-(null, "Prevenção", "2019-07-10 14:17:00", 4, 12),
+(null, "Cirurgia de revascularização do miocárdio.", "2019-08-10 10:11:00", 1, 3),
+(null, "Prevenção", "2019-07-10 14:17:00", 2, 12),
 (null, "Distúrbios estrutural do sistema nervoso.", "2019-07-01 22:19:00", 3, 13),
-(null, "Prevenção intestino grosso.", "2019-09-20 15:23:00", 11, 5),
-(null, "Avaliação de imunidade.", "2019-04-20 08:14:00", 6, 10),
-(null, "Infecção de pele.", "2019-04-11 19:11:00", 5, 11),
-(null, "Dor crônica aguda.", "2020-03-20 12:03:00", 9, 8),
-(null, "Aids", "2020-03-19 08:06:00", 2, 14),
-(null, "Traumatismo craniano.", "2020-03-17 09:12:00", 14, 1),
-(null, "Gordura no coração.", "2020-02-07 07:07:00", 12, 4),
-(null, "Falha nos rins.", "2020-02-02 04:13:00", 10, 6),
-(null, "Transtorno afetivo bipolar.", "2021-11-19 22:09:00", 1, 15),
-(null, "Infecção hospitalar.", "2021-11-21 23:11:00", 7, 9),
-(null, "Cirurgia Abdomina.", "2021-12-05 11:10:00", 8, 7),
+(null, "Prevenção intestino grosso.", "2019-09-20 15:23:00", 4, 5),
+(null, "Avaliação de imunidade.", "2019-04-20 08:14:00", 5, 10),
+(null, "Infecção de pele.", "2019-04-11 19:11:00", 6, 11),
+(null, "Dor crônica aguda.", "2020-03-20 12:03:00", 7, 8),
+(null, "Aids", "2020-03-19 08:06:00", 8, 14),
+(null, "Traumatismo craniano.", "2020-03-17 09:12:00", 9, 1),
+(null, "Gordura no coração.", "2020-02-07 07:07:00", 10, 4),
+(null, "Falha nos rins.", "2020-02-02 04:13:00", 11, 6),
+(null, "Transtorno afetivo bipolar.", "2021-11-19 22:09:00", 12, 15),
+(null, "Infecção hospitalar.", "2021-11-21 23:11:00", 13, 9),
+(null, "Cirurgia Abdominal.", "2021-12-05 11:10:00", 14, 7),
 (null, "Degeneração macular.", "2021-1-03 10:05:00", 15, 2);
 
 -- INTERNAÇÃO
@@ -234,6 +234,7 @@ INSERT INTO internacao VALUES
 
 
 -- TEST TRIGGERS
+
 DELETE FROM medico WHERE id_medico = FLOOR(RAND() * ((SELECT COUNT(*) FROM consulta) + 1));
 SELECT * FROM medicobackupdelete;
 
@@ -246,4 +247,38 @@ DELETE FROM consulta WHERE id_consulta = FLOOR(RAND() * ((SELECT COUNT(*) FROM m
 SELECT * FROM consultabackupdelete;
 
 SELECT * FROM consultacominternacao;
+
 -- TEST TRIGGERS
+
+
+-- VIEWS
+
+CREATE VIEW consultas AS
+SELECT nome_medico, nome_paciente, diagnostico_consulta FROM consulta
+INNER JOIN paciente ON fk_paciente_consulta = id_paciente
+INNER JOIN medico ON fk_medico_consulta = id_medico;
+
+CREATE VIEW especialidade_diagnostico AS
+SELECT especialidade_medico, diagnostico_consulta FROM medico
+INNER JOIN consulta ON id_medico = fk_medico_consulta;
+;
+
+CREATE VIEW paciente_internado  AS
+SELECT nome_paciente AS Paciente, nome_medico AS Medico, diagnostico_consulta AS Diagnostico FROM internacao
+INNER JOIN consulta ON fk_consulta_internacao = id_consulta
+INNER JOIN paciente ON fk_paciente_consulta = id_paciente
+INNER JOIN medico ON fk_medico_consulta = id_medico;
+
+-- VIEWS
+
+
+-- TEST VIEWS
+
+SELECT * FROM consultas ;
+
+SELECT * FROM especialidade_diagnostico;
+
+SELECT * FROM paciente_internado;
+
+
+-- TEST VIEWS
