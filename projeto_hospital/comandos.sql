@@ -280,5 +280,9 @@ SELECT * FROM especialidade_diagnostico;
 
 SELECT * FROM paciente_internado;
 
-
 -- TEST VIEWS
+
+
+--
+
+
