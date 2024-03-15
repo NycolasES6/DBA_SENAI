@@ -1,4 +1,4 @@
--- Active: 1710501802721@@127.0.0.1@3306@db_hospital
+-- Active: 1709576080714@@127.0.0.1@3306@db_hospital
 /* Logico: */
 
 -- CRIACAO DO BANCO
@@ -224,7 +224,7 @@ INSERT INTO consulta VALUES
 
 -- INTERNAÇÃO
 INSERT INTO internacao VALUES
-(null, "2019-08-10 11:23:00", "2019-08-19 12:11:00", 1),
+(null, "2019-08-10 11:23:00", "2019-08-12 12:11:00", 1),
 (null, "2019-07-01 23:45:00", "2019-07-12 10:09:00", 3),
 (null, "2020-03-20 13:17:00", "2020-04-02 22:34:00", 7),
 (null, "2020-02-02 05:34:00", "2020-02-15 13:45:00", 11),
@@ -283,6 +283,89 @@ SELECT * FROM paciente_internado;
 -- TEST VIEWS
 
 
---
+-- INSERTS
+
+-- 1
+SELECT nome_paciente, nome_medico FROM consulta
+INNER JOIN medico ON id_medico = fk_medico_consulta
+INNER JOIN paciente ON id_paciente = fk_paciente_consulta;
+
+-- 2
+SELECT nome_paciente, diagnostico_consulta FROM consulta
+INNER JOIN paciente ON id_paciente = fk_paciente_consulta;
+
+-- 3
+SELECT nome_paciente, dt_nascimento_paciente FROM paciente WHERE YEAR(dt_nascimento_paciente) < "1990";
+
+-- 4
+SELECT nome_paciente FROM paciente ;
+
+-- 5
+SELECT nome_paciente, dt_nascimento_paciente FROM paciente WHERE YEAR(dt_nascimento_paciente) BETWEEN"1990" AND "2005";
+
+-- 6
+SELECT COUNT(*) AS quantidade_paciente FROM paciente;
+
+
+-- 7
+SELECT especialidade_medico, COUNT(*) FROM paciente
+INNER JOIN consulta ON id_paciente = fk_paciente_consulta
+INNER JOIN medico ON id_medico = fk_medico_consulta
+GROUP BY especialidade_medico;
+
+-- 8
+SELECT COUNT(*) as qtd_internacao, diagnostico_consulta FROM internacao
+INNER JOIN consulta ON id_consulta = fk_consulta_internacao
+GROUP BY id_internacao;
+
+-- 9
+SELECT COUNT(especialidade_medico), especialidade_medico FROM medico
+GROUP BY especialidade_medico;
+
+-- 10
+SELECT COUNT(id_consulta) AS qtd_consulta FROM consulta;
+
+
+-- 11
+SELECT nome_medico, diagnostico_consulta  FROM medico
+INNER JOIN consulta ON id_medico = fk_medico_consulta
+INNER JOIN internacao ON id_consulta = fk_consulta_internacao;
+
+-- 12
+SELECT nome_medico, especialidade_medico FROM medico;
+
+-- 13
+SELECT nome_medico, nome_paciente, dt_nascimento_paciente, dt_entrada_internacao FROM medico
+INNER JOIN consulta ON id_medico = fk_medico_consulta
+INNER JOIN internacao ON id_consulta = fk_consulta_internacao
+INNER JOIN paciente ON id_paciente = fk_paciente_consulta;
+
+-- 14
+SELECT COUNT(id_medico), especialidade_medico FROM medico GROUP BY especialidade_medico;
+
+-- 15
+SELECT nome_medico, especialidade_medico FROM medico WHERE (especialidade_medico = "cardiologia" OR especialidade_medico = "pediatria") OR (especialidade_medico = "imunologia" OR especialidade_medico = "oftalmologia");
+
+
+-- 16
+SELECT id_consulta FROM consulta
+INNER JOIN internacao ON id_consulta = fk_consulta_internacao;
+
+-- 17
+SELECT id_consulta,dt_consulta  FROM consulta;
+
+-- 18
+SELECT id_consulta,dt_entrada_internacao, dt_saida_internacao FROM consulta
+INNER JOIN internacao ON id_consulta = fk_consulta_internacao
+WHERE DATEDIFF(DATE(dt_saida_internacao), DATE(dt_entrada_internacao)) > 5;
+
+-- 19
+SELECT id_internacao FROM internacao;
+
+-- 20
+SELECT id_consulta,dt_entrada_internacao, dt_saida_internacao FROM consulta
+INNER JOIN internacao ON id_consulta = fk_consulta_internacao
+WHERE DATEDIFF(DATE(dt_saida_internacao), DATE(dt_entrada_internacao)) = 2;
+
 
 
