@@ -39,7 +39,7 @@ CREATE TABLE musica (
     nome_musica VARCHAR(120) UNIQUE NOT NULL,
     fk_compositor_musica INT NOT NULL,
     fk_genero_musica INT NOT NULL,
-    fk_albun_musica INT NOT NULL,
+    fk_albun_musica INT,
     fk_artista_musica INT NOT NULL
 );
 
@@ -53,8 +53,7 @@ CREATE TABLE musicaPlaylist (
 -- FOREIGN KEYS
 ALTER TABLE albun ADD CONSTRAINT FK_artista_albun
     FOREIGN KEY (fk_artista_albun)
-    REFERENCES artista (id_artista)
-    ON DELETE CASCADE;
+    REFERENCES artista (id_artista);
  
 ALTER TABLE artista ADD CONSTRAINT FK_genero_artista
     FOREIGN KEY (fk_genero_artista)
@@ -78,8 +77,7 @@ ALTER TABLE musica ADD CONSTRAINT FK_genero_musica
  
 ALTER TABLE musica ADD CONSTRAINT FK_albun_musica
     FOREIGN KEY (fk_albun_musica)
-    REFERENCES albun (id_albun)
-    ON DELETE CASCADE;
+    REFERENCES albun (id_albun);
  
 ALTER TABLE musica ADD CONSTRAINT FK_artista_musica
     FOREIGN KEY (fk_artista_musica)
