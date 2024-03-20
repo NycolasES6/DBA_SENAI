@@ -1,4 +1,4 @@
--- Active: 1709576080714@@127.0.0.1@3306@db_spotymusic
+-- Active: 1710955450059@@127.0.0.1@3306@db_spotymusic
 USE db_spotymusic;
 
 INSERT INTO `genero` VALUES
@@ -7,7 +7,7 @@ INSERT INTO `genero` VALUES
     (NULL, "forró"),
     (NULL, "bolsa nova"),
     (NULL, "blues");
-
+    
 INSERT INTO `artista` VALUES
     (null,"Nycolas Valval", 1),
     (null,"Atylas Malmal", 2),

@@ -1,4 +1,4 @@
--- Active: 1709576080714@@127.0.0.1@3306@db_spotymusic
+-- Active: 1710955450059@@127.0.0.1@3306@db_spotymusic
 USE db_spotymusic;
 
 -- TRIGGERS --- ---
@@ -13,9 +13,12 @@ INNER JOIN albun ON fk_albun_musica = id_albun
 INNER JOIN artista ON fk_artista_albun = id_artista
 INNER JOIN compositor ON fk_compositor_musica = id_compositor;
 
-CREATE VIEW  AS ;
+CREATE VIEW nomeMusicaPlaylist AS SELECT nome_musica, nome_playlist FROM musicaplaylist
+INNER JOIN musica ON `fk_musica_musicaPlaylist` = id_musica
+INNER JOIN playlist ON `fk_playlist_musicaPlaylist` = id_playlist;
 
-CREATE VIEW  AS ;
+CREATE VIEW artistaGenero AS SELECT nome_artista, nome_genero FROM artista
+INNER JOIN genero ON fk_genero_artista = id_genero;
 -- TRIGGERS --- ---
 
 
@@ -26,4 +29,7 @@ SELECT * FROM musicaalbun;
 
 SELECT * FROM musicaalbunartistacompositor;
 
+SELECT * FROM nomeMusicaPlaylist;
+
+SELECT * FROM artistaGenero;
 -- TEST TRIGGERS --- ---
