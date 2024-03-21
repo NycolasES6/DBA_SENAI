@@ -1,4 +1,4 @@
--- Active: 1710955450059@@127.0.0.1@3306@db_spotymusic
+-- Active: 1711041625749@@127.0.0.1@3306@db_spotymusic
 USE db_spotymusic;
 
 CREATE TABLE qtdGeral (
